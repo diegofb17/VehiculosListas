@@ -236,4 +236,19 @@ public class EmpresaAlquilerVehiculos {
             }
         }
     }
+    
+    public void ordenarCatalogoVehiculos() {
+        Vehiculo aux;
+        for (int i = 0; i < vehiculos.size() - 1; i++) {
+            for (int j = i + 1; j < vehiculos.size(); j++) {
+                int comparar = vehiculos.get(i).getMatricula().compareTo(vehiculos.get(j).getMatricula());
+                if (comparar > 0) {
+                    aux = vehiculos.get(i);
+                    vehiculos.set(i, vehiculos.get(j));
+                    vehiculos.set(j, aux);
+                }
+            }
+        }
+    }
+    
 }
