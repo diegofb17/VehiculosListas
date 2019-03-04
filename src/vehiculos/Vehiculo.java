@@ -79,7 +79,7 @@ public class Vehiculo {
 
     @Override
     public String toString() {
-        return "Vehiculo{" + "matricula=" + matricula + ", marca=" + marca + ", modelo=" + modelo + ", color=" + color + ", tarifa=" + tarifa + ", disponible=" + disponible + '}';
+        return "Vehiculo: (" + "matricula=" + matricula + ", marca=" + marca + ", modelo=" + modelo + ", color=" + color + ", tarifa=" + tarifa + ", disponible=" + disponible + ")\n";
     }
 
     public static String matriculaAleatoria() {

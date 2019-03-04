@@ -52,27 +52,34 @@ public class EmpresaAlquilerVehiculos {
     }
 
     public void registrarCliente(Cliente nuevo) {
-        clientes.add(nuevo);
+        clientes.add(totalClientes, nuevo);
         totalClientes++;
     }
 
     public void registrarVehiculo(Vehiculo nuevo) {
-        vehiculos.add(nuevo);
+        vehiculos.add(totalVehiculos, nuevo);
         totalVehiculos++;
     }
 
     public void imprimirClientes() {
-        System.out.println("NIF cliente\tNombre\n");
         for (int i = 0; i < this.totalClientes; i++) {
-            System.out.println(clientes.get(i));
+            System.out.println(clientes.get(i).toString());//Quitar toString si no funciona
         }
     }
 
     public void imprimirVehiculos() {
-        System.out.println("Matricula\tModelo\tColor\tImporte\tDisponible\n");
         for (int i = 0; i < this.totalVehiculos; i++) {
-            System.out.println(vehiculos.get(i));
+            System.out.println(vehiculos.get(i).toString());
         }
+    }
+
+    private Cliente getCliente(String nif) {
+        for (int i = 0; i < this.getTotalClientes(); i++) {
+            if (this.clientes.get(i).getNif().equals(nif)) {
+                return this.clientes.get(i);
+            }
+        }
+        return null;
     }
 
     private Vehiculo getVehiculo(String matricula) {
@@ -95,14 +102,13 @@ public class EmpresaAlquilerVehiculos {
         // añoHoy(), cuya declaración no se incluye
         if (vehiculo.getDisponible()) {
             vehiculo.setDisponible(false);
-            this.alquileres.set(this.totalAlquileres, new VehiculoAlquilado(cliente, vehiculo, diaAlquiler(), mesAlquiler(), añoAlquiler(), dias));
-
+            this.alquileres.add(new VehiculoAlquilado(cliente, vehiculo, diaAlquiler(), mesAlquiler(), añoAlquiler(), dias));
             this.totalAlquileres++;
         }
     }
 
     public void recibirVehiculo(String matricula) {
-        // busca el vehículo con la matrícula dada en el
+        // Busca el vehículo con la matrícula dada en el
         // array vehiculos y modifica su disponibilidad
         // para que se pueda alquilar de nuevo
         Vehiculo vehiculo = getVehiculo(matricula);
@@ -184,16 +190,6 @@ public class EmpresaAlquilerVehiculos {
         this.alquileres = alquileres;
     }
 
-    private Cliente getCliente(String nif) {
-        for (int i = 0; i < this.getTotalClientes(); i++) {
-            if (this.clientes.get(i).getNif().equals(nif)) {
-                return this.clientes.get(i);
-            }
-        }
-        return null;
-
-    }
-
     public int diaAlquiler() {
         LocalDate hoy = LocalDate.now();
         return hoy.getDayOfMonth();
@@ -212,6 +208,7 @@ public class EmpresaAlquilerVehiculos {
     public ArrayList<Cliente> clientesAleatorios() {
         for (int i = 0; i < 25; i++) {
             this.clientes.add(Cliente.clienteAleatorio());
+            this.totalClientes++;
         }
         return this.clientes;
     }
@@ -219,6 +216,7 @@ public class EmpresaAlquilerVehiculos {
     public ArrayList<Vehiculo> vehiculosAleatorios() {
         for (int i = 0; i < 25; i++) {
             this.vehiculos.add(Vehiculo.cocheAleatorio());
+            this.totalVehiculos++;
         }
         return this.vehiculos;
     }
@@ -251,15 +249,16 @@ public class EmpresaAlquilerVehiculos {
         }
     }
 
-     public int busquedaBinariaNif(String nif){
+    public int busquedaBinariaNif(String nif) {
         boolean condicion = false;
         int minimo = 0;
         int maximo = this.clientes.size() - 1;
         int mitad = 0;
-        
+
         while ((minimo <= maximo) && (!condicion)) {
             mitad = (minimo + maximo) / 2;
             if (this.clientes.get(mitad).getNif().equals(nif)) {
+                condicion=true;
             } else if (this.clientes.get(mitad).getNif().compareTo(nif) > 0) {
                 maximo = mitad - 1;
             } else {
@@ -272,17 +271,17 @@ public class EmpresaAlquilerVehiculos {
             return -1;
         }
     }
-     
-     public int busquedaBinariaMatricula(String matricula){
+
+    public int busquedaBinariaMatricula(String matricula) {
         boolean condicion = false;
         int minimo = 0;
         int maximo = this.vehiculos.size() - 1;
         int mitad = 0;
-        
+
         while ((minimo <= maximo) && (!condicion)) {
             mitad = (minimo + maximo) / 2;
             if (this.vehiculos.get(mitad).getMatricula().equals(matricula)) {
-                condicion = true;  
+                condicion = true;
             } else if (this.vehiculos.get(mitad).getMatricula().compareTo(matricula) > 0) {
                 maximo = mitad - 1;
             } else {
@@ -295,7 +294,5 @@ public class EmpresaAlquilerVehiculos {
             return -1;
         }
     }
-    
+
 }
-
-
