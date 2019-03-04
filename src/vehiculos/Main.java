@@ -14,5 +14,13 @@ public class Main {
 
         //Creamos el objeto empresa y le damos unos datos
         EmpresaAlquilerVehiculos empresa = new EmpresaAlquilerVehiculos("A83658594", "mitra whaoz", "www.mitraWhaoz.com");
+
+        // Rellenamos Clientes y Vehiculos
+        empresa.clientesAleatorios();
+        empresa.vehiculosAleatorios();
+        
+        //Mostramos por pantalla los datos aleatorios que hemos generado anteriormente
+        empresa.imprimirClientes1();
+        empresa.imprimirVehiculos();
     }
 }
