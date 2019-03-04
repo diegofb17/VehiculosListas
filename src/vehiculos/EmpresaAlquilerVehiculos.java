@@ -251,12 +251,12 @@ public class EmpresaAlquilerVehiculos {
         }
     }
 
-    public int busquedaBinariaNif(String nif) {
-
+     public int busquedaBinariaNif(String nif){
         boolean condicion = false;
         int minimo = 0;
         int maximo = this.clientes.size() - 1;
         int mitad = 0;
+        
         while ((minimo <= maximo) && (!condicion)) {
             mitad = (minimo + maximo) / 2;
             if (this.clientes.get(mitad).getNif().equals(nif)) {
@@ -272,5 +272,30 @@ public class EmpresaAlquilerVehiculos {
             return -1;
         }
     }
-
+     
+     public int busquedaBinariaMatricula(String matricula){
+        boolean condicion = false;
+        int minimo = 0;
+        int maximo = this.vehiculos.size() - 1;
+        int mitad = 0;
+        
+        while ((minimo <= maximo) && (!condicion)) {
+            mitad = (minimo + maximo) / 2;
+            if (this.vehiculos.get(mitad).getMatricula().equals(matricula)) {
+                condicion = true;  
+            } else if (this.vehiculos.get(mitad).getMatricula().compareTo(matricula) > 0) {
+                maximo = mitad - 1;
+            } else {
+                minimo = mitad + 1;
+            }
+        }
+        if (condicion) {
+            return mitad;
+        } else {
+            return -1;
+        }
+    }
+    
 }
+
+
