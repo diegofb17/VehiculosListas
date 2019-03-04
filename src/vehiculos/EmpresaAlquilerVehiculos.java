@@ -225,7 +225,7 @@ public class EmpresaAlquilerVehiculos {
 
     public void ordenarCarteraClientes() {
         Cliente aux;
-        for (int i = 0; i < clientes.size()-1; i++) {
+        for (int i = 0; i < clientes.size() - 1; i++) {
             for (int j = i + 1; j < clientes.size(); j++) {
                 int comparar = clientes.get(i).getNif().compareTo(clientes.get(j).getNif());
                 if (comparar > 0) {
@@ -236,7 +236,7 @@ public class EmpresaAlquilerVehiculos {
             }
         }
     }
-    
+
     public void ordenarCatalogoVehiculos() {
         Vehiculo aux;
         for (int i = 0; i < vehiculos.size() - 1; i++) {
@@ -250,5 +250,27 @@ public class EmpresaAlquilerVehiculos {
             }
         }
     }
-    
+
+    public int busquedaBinariaNif(String nif) {
+
+        boolean condicion = false;
+        int minimo = 0;
+        int maximo = this.clientes.size() - 1;
+        int mitad = 0;
+        while ((minimo <= maximo) && (!condicion)) {
+            mitad = (minimo + maximo) / 2;
+            if (this.clientes.get(mitad).getNif().equals(nif)) {
+            } else if (this.clientes.get(mitad).getNif().compareTo(nif) > 0) {
+                maximo = mitad - 1;
+            } else {
+                minimo = mitad + 1;
+            }
+        }
+        if (condicion) {
+            return mitad;
+        } else {
+            return -1;
+        }
+    }
+
 }
