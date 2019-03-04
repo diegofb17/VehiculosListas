@@ -22,6 +22,12 @@ public class Cliente {
         this.nombre = nombre;
         this.apellidos = apellidos;
     }
+    
+    public Cliente(){
+        this.nombre="";
+        this.apellidos="";
+        this.nif="";
+    }
 
     public String getNif() {
         return nif;
@@ -210,6 +216,6 @@ public class Cliente {
 
     @Override
     public String toString() {
-        return "Cliente{" + "nif=" + nif + ", nombre=" + nombre + ", apellidos=" + apellidos + '}';
+        return "Cliente: " + "(nif=" + nif + ", nombre= " + nombre + ", apellidos= " + apellidos + ")\n";
     }
 }
